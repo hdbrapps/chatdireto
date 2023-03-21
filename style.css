@@ -13,6 +13,9 @@ body {
   font-family: 'Montserrat', sans-serif;
   margin: 0;
   padding: 0;
+  min-height: 100vh;
+  display: grid;
+  place-content: center
 }
 
 h1 {
@@ -75,5 +78,28 @@ button[type="submit"]:hover {
   .form {
     max-width: 400px;
     margin: 2rem auto;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  h1 {
+    font-size: 2rem;
+    margin-top: 1rem;
+  }
+  .form {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    border-radius: 0;
+  }
+  input[type="tel"] {
+    font-size: 1.2rem;
+  }
+  button[type="submit"] {
+    font-size: 1.2rem;
   }
 }
