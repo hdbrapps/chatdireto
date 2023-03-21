@@ -1,24 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Vn Chat - App</title>
+	<title>Vn Chat - app</title>
+	<meta name="description" content="Chat direto - WhatsApp">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 	<link rel="stylesheet" href="style.css">
-	<link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/1453/1453501.png" type="image/x-icon">
+	<link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/9995/9995793.png" type="image/x-icon">
 </head>
 <body>
 	<h1>
 		<i class="fab fa-whatsapp"></i>
 		Vn Chat
 	  </h1>	  
-		<div class="form">
-			<form action="https://wa.me/" method="get">
-				<label for="phone">Digite o número:</label>
-				<input type="tel" id="phone" name="text" placeholder="'(xx) xxxxx-xxxx'" pattern="[0-9]*#?[0-9]*">
-				<button type="submit">Abrir Chat</button>
-			</form>			
-		</div>
+	  <div class="form">
+		<form onsubmit="event.preventDefault(); openWhatsApp();" id="whatsappForm">
+	  
+		  <label for="phone">Digite seu zap:</label>
+		  <input type="tel" id="phone" name="text" placeholder="" required>
+		  <button type="submit" id="whatsappButton">Abrir Chat</button>
+	  
+		</form>			
+	  </div>
 	</div>
 	<script>
 		const phoneInput = document.querySelector('#phone');
@@ -41,6 +44,25 @@
 			// Atualiza o valor do campo de entrada com o número de telefone formatado
 			event.target.value = phoneNumber;
 		});
+		
 	</script>
+
+<script>
+	function openWhatsApp() {
+	  const phoneInput = document.querySelector('#phone');
+	  const phoneNumber = phoneInput.value.replace(/\D/g, '');
+	  const whatsappLink = `https://wa.me/${phoneNumber}`;
+	  if (!phoneNumber) {
+		phoneInput.setCustomValidity('Campo obrigatório');
+		phoneInput.reportValidity();
+	  } else {
+		phoneInput.setCustomValidity('');
+		window.open(whatsappLink, '_blank');
+	  }
+	}
+  </script>
+  
+	<script src="/app.js"></script>
+	<script src="/required.js"></script>
 </body>
 </html>
