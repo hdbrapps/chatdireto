@@ -1,0 +1,66 @@
+/* fonte personalizada */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+
+/* cores personalizadas */
+:root {
+  --cor-primaria: #25d366;
+  --cor-secundaria: #128c7e;
+  --cor-texto: #333;
+}
+
+body {
+  background-color: #f2f2f2;
+  font-family: 'Montserrat', sans-serif;
+}
+
+h1 {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--cor-primaria);
+}
+
+.form {
+  max-width: 400px;
+  margin: 2rem auto;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,.3);
+  border-radius: 10px;
+  padding: 2rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  color: var(--cor-texto);
+}
+
+input[type="tel"] {
+  width: 100%;
+  border: 2px solid var(--cor-primaria);
+  border-radius: 5px;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  color: var(--cor-texto);
+}
+
+button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+  border: none;
+  background-color: var(--cor-primaria);
+  color: #fff;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: var(--cor-secundaria);
+}
+

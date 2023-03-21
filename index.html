@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Enviar mensagem no WhatsApp</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+	<link rel="stylesheet" href="style.css">
+	<link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/1453/1453501.png" type="image/x-icon">
+</head>
+<body>
+	<h1>
+		<i class="fab fa-whatsapp"></i>
+		Vn Link whatsApp
+	  </h1>
+	  
+		<div class="form">
+			<form action="https://wa.me/" method="get">
+				<label for="phone">Digite o número:</label>
+				<input type="tel" id="phone" name="text" placeholder="'(xx) xxxxx-xxxx'" pattern="[0-9]*#?[0-9]*" required>
+				<button type="submit">Abrir Chat</button>
+			</form>
+			
+			
+			
+		</div>
+	</div>
+	<script>
+		const phoneInput = document.querySelector('#phone');
+	
+		// Adiciona um ouvinte de eventos para o evento "input"
+		phoneInput.addEventListener('input', (event) => {
+			// Obtém o valor do campo de entrada
+			let phoneNumber = event.target.value;
+			
+			// Remove tudo exceto dígitos
+			phoneNumber = phoneNumber.replace(/\D/g, '');
+			
+			// Aplica a formatação desejada
+			if (phoneNumber.length === 11) {
+				phoneNumber = phoneNumber.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+			} else {
+				phoneNumber = phoneNumber.replace(/(\d{2})(\d{4,5})(\d{4})/, '($1) $2-$3');
+			}
+			
+			// Atualiza o valor do campo de entrada com o número de telefone formatado
+			event.target.value = phoneNumber;
+		});
+	</script>
+	
+	
+	
+	
+	
+	
+	
+	
+</body>
+</html>
