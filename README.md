@@ -1,2 +1,2 @@
-# chatdireto
-chat direto para whatsapp
+# Vn Chat - App
+chat direto para WhatsApp
