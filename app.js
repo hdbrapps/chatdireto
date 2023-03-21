@@ -1,45 +1,33 @@
 function openWhatsApp() {
-  const phoneInput = document.querySelector('#phone');
-  const phoneNumber = phoneInput.value.replace(/\D/g, '');
-  const whatsappLink = `https://wa.me/${phoneNumber}`;
-  if (!phoneNumber) {
-    phoneInput.setCustomValidity('Campo obrigatório');
-    phoneInput.reportValidity();
-  } else {
-    phoneInput.setCustomValidity('');
-    window.location.href = whatsappLink;
-    setTimeout(() => {
-      if (document.visibilityState === 'visible') {
-        window.location.href = `intent://send/${phoneNumber}#Intent;scheme=whatsapp;package=com.whatsapp;action=android.intent.action.SENDTO;end`
-      }
-    }, 2000);
+  const isMobileChrome = /Chrome/.test(navigator.userAgent) && /Mobile/.test(navigator.userAgent);
+  if (isMobileChrome) {
+    alert('Para abrir o WhatsApp, por favor, toque no ícone de menu do Chrome e selecione "Abrir no aplicativo".');
   }
+  let phoneNumber = document.getElementById("phone").value.replace(/\D/g, '');
+  phoneNumber = '55' + phoneNumber; // Adicione o código do país antes do número
+  window.location.href = 'https://api.whatsapp.com/send?phone=' + phoneNumber;
 }
 
 document.getElementById("whatsappForm").addEventListener("submit", function(event) {
   if (!document.getElementById("phone").value) {
-    alert("Por favor, preencha o número de telefone.");
+    alert("Por favor");
     event.preventDefault();
   }
 });
 
 const phoneInput = document.querySelector('#phone');
 
-phoneInput.addEventListener('input', (event) => {
-  let phoneNumber = event.target.value;
-  phoneNumber = phoneNumber.replace(/\D/g, '');
-  if (phoneNumber.length === 11) {
-    phoneNumber = phoneNumber.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-  } else {
-    phoneNumber = phoneNumber.replace(/(\d{2})(\d{4,5})(\d{4})/, '($1) $2-$3');
-  }
-  event.target.value = phoneNumber;
-});
-
 phoneInput.addEventListener('paste', (event) => {
+  // Impedir a ação padrão de colar o texto no campo de entrada
   event.preventDefault();
+
+  // Obter o texto colado
   const pastedText = event.clipboardData.getData('text');
+
+  // Filtrar apenas os dígitos do texto colado
   const phoneNumber = pastedText.replace(/\D/g, '');
+
+  // Formatar o número de telefone e definir o valor do campo "phone"
   if (phoneNumber.length === 11) {
     phoneInput.value = phoneNumber.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
   } else {
@@ -48,8 +36,10 @@ phoneInput.addEventListener('paste', (event) => {
 });
 
 document.addEventListener('paste', function(event) {
+  // Verifica se o que foi colado é um número de telefone válido
   const phoneNumber = event.clipboardData.getData('text').match(/\d+/g)?.join('');
   if (phoneNumber && phoneNumber.length >= 10 && phoneNumber.length <= 11) {
+    // Preenche o campo "phone" com o número de telefone colado
     document.getElementById('phone').value = phoneNumber;
   }
 });
