@@ -91,7 +91,7 @@ button[type="submit"]:hover {
     margin-top: 1rem;
   }
   .form {
-    width: 100%;
+    
     max-width: 100%;
     margin: 0;
     border-radius: 20px;
