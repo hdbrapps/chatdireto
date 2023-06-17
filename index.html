@@ -25,18 +25,17 @@
 		const phoneInput = document.querySelector('#phone');
 
 		phoneInput.addEventListener('paste', (event) => {
-			const clipboardData = event.clipboardData || window.clipboardData;
-			const pastedData = clipboardData.getData('text');
-			let phoneNumber = pastedData.replace(/\D/g, '');
-			if (phoneNumber.length === 11) {
-				phoneNumber = phoneNumber.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-			} else {
-				phoneNumber = phoneNumber.replace(/(\d{2})(\d{4,5})(\d{4})/, '($1) $2-$3');
-			}
-			phoneInput.value = phoneNumber;
-			
-			// Chama a função para abrir o chat automaticamente
-			openWhatsApp();
+			setTimeout(() => {
+				const phoneNumber = phoneInput.value.replace(/\D/g, '');
+				const whatsappLink = `https://wa.me/${phoneNumber}`;
+				if (!phoneNumber) {
+					phoneInput.setCustomValidity('Campo obrigatório');
+					phoneInput.reportValidity();
+				} else {
+					phoneInput.setCustomValidity('');
+					window.open(whatsappLink, '');
+				}
+			}, 100);
 		});
 
 		function openWhatsApp() {
