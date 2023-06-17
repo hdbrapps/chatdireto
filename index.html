@@ -7,6 +7,28 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 	<link rel="stylesheet" href="style.css">
 	<link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/9995/9995793.png" type="image/x-icon">
+	<style>
+		.modal {
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 300px;
+			padding: 20px;
+			background-color: #f5f5f5;
+			border: 1px solid #ccc;
+			text-align: center;
+			z-index: 9999;
+		}
+
+		.modal__close {
+			position: absolute;
+			top: 5px;
+			right: 5px;
+			font-size: 12px;
+			cursor: pointer;
+		}
+	</style>
 </head>
 <body>
 	<h1>
@@ -20,9 +42,15 @@
 			<button type="submit" id="whatsappButton">Abrir Chat</button>
 		</form>			
 	</div>
+
+	<div class="modal" id="modal">
+		<p>Site desenvolvido por VN Code</p>
+		<span class="modal__close" onclick="closeModal()">&times;</span>
+	</div>
 	
 	<script>
 		const phoneInput = document.querySelector('#phone');
+		const modal = document.getElementById('modal');
 
 		phoneInput.addEventListener('paste', (event) => {
 			setTimeout(() => {
@@ -34,6 +62,7 @@
 				} else {
 					phoneInput.setCustomValidity('');
 					window.open(whatsappLink, '');
+					openModal();
 				}
 			}, 100);
 		});
@@ -47,7 +76,16 @@
 			} else {
 				phoneInput.setCustomValidity('');
 				window.open(whatsappLink, '');
+				openModal();
 			}
+		}
+
+		function openModal() {
+			modal.style.display = 'block';
+		}
+
+		function closeModal() {
+			modal.style.display = 'none';
 		}
 	</script>
 </body>
