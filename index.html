@@ -12,27 +12,26 @@
 	<h1>
 		<i class="fab fa-whatsapp"></i>
 		Vn Chat
-	  </h1>	  
-	  <div class="form">
+	</h1>	  
+	<div class="form">
 		<form onsubmit="event.preventDefault(); openWhatsApp();" id="whatsappForm">
-	  
-		  <label for="phone">Digite seu zap:</label>
-		  <input type="tel" id="phone" name="text" placeholder="" required>
-		  <button type="submit" id="whatsappButton">Abrir Chat</button>
-	  
+			<label for="phone">Digite seu zap:</label>
+			<input type="tel" id="phone" name="text" placeholder="" required>
+			<button type="submit" id="whatsappButton">Abrir Chat</button>
 		</form>			
-	  </div>
 	</div>
+	
 	<script>
 		const phoneInput = document.querySelector('#phone');
-	
-		// Adiciona um ouvinte de eventos para o evento "input"
-		phoneInput.addEventListener('input', (event) => {
-			// Obtém o valor do campo de entrada
-			let phoneNumber = event.target.value;
+
+		// Adiciona um ouvinte de eventos para o evento "paste"
+		phoneInput.addEventListener('paste', (event) => {
+			// Obtém o número colado
+			const clipboardData = event.clipboardData || window.clipboardData;
+			const pastedData = clipboardData.getData('text');
 			
 			// Remove tudo exceto dígitos
-			phoneNumber = phoneNumber.replace(/\D/g, '');
+			let phoneNumber = pastedData.replace(/\D/g, '');
 			
 			// Aplica a formatação desejada
 			if (phoneNumber.length === 11) {
@@ -42,27 +41,20 @@
 			}
 			
 			// Atualiza o valor do campo de entrada com o número de telefone formatado
-			event.target.value = phoneNumber;
+			phoneInput.value = phoneNumber;
 		});
-		
-	</script>
 
-<script>
-	function openWhatsApp() {
-	  const phoneInput = document.querySelector('#phone');
-	  const phoneNumber = phoneInput.value.replace(/\D/g, '');
-	  const whatsappLink = `https://wa.me/${phoneNumber}`;
-	  if (!phoneNumber) {
-		phoneInput.setCustomValidity('Campo obrigatório');
-		phoneInput.reportValidity();
-	  } else {
-		phoneInput.setCustomValidity('');
-		window.open(whatsappLink, '');
-	  }
-	}
-  </script>
-  
-	<script src="/app.js"></script>
-	<script src="/required.js"></script>
+		function openWhatsApp() {
+			const phoneNumber = phoneInput.value.replace(/\D/g, '');
+			const whatsappLink = `https://wa.me/${phoneNumber}`;
+			if (!phoneNumber) {
+				phoneInput.setCustomValidity('Campo obrigatório');
+				phoneInput.reportValidity();
+			} else {
+				phoneInput.setCustomValidity('');
+				window.open(whatsappLink, '');
+			}
+		}
+	</script>
 </body>
 </html>
