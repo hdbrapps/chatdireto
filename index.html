@@ -24,24 +24,19 @@
 	<script>
 		const phoneInput = document.querySelector('#phone');
 
-		// Adiciona um ouvinte de eventos para o evento "paste"
 		phoneInput.addEventListener('paste', (event) => {
-			// Obtém o número colado
 			const clipboardData = event.clipboardData || window.clipboardData;
 			const pastedData = clipboardData.getData('text');
-			
-			// Remove tudo exceto dígitos
 			let phoneNumber = pastedData.replace(/\D/g, '');
-			
-			// Aplica a formatação desejada
 			if (phoneNumber.length === 11) {
 				phoneNumber = phoneNumber.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
 			} else {
 				phoneNumber = phoneNumber.replace(/(\d{2})(\d{4,5})(\d{4})/, '($1) $2-$3');
 			}
-			
-			// Atualiza o valor do campo de entrada com o número de telefone formatado
 			phoneInput.value = phoneNumber;
+			
+			// Chama a função para abrir o chat automaticamente
+			openWhatsApp();
 		});
 
 		function openWhatsApp() {
